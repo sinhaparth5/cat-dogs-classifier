@@ -4,10 +4,15 @@
 class Layer {
 public:
     Layer(int inputSize, int outputSize);
+    void initializeWeights();
     std::vector<double> forward(const std::vector<double>& input);
     std::vector<double> backward(const std::vector<double>& gradients, double learningRate);
     void updateWeights();
     int getOutputSize() const { return outputSize; }
+
+    // Utility functions for activation
+    double sigmoid(double x);
+    double sigmoid_derivative(double x);
     
 private:
     int inputSize, outputSize;
@@ -17,8 +22,4 @@ private:
     std::vector<double> lastOutput;
     std::vector<std::vector<double>> weightGradients;
     std::vector<double> biasGradients;
-    
-    static double sigmoid(double x);
-    static double sigmoid_derivative(double x);
-    void initializeWeights();
 };
